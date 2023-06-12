@@ -14,23 +14,25 @@ StartButton.addEventListener("click", () => {
   const discountElement = document.querySelector("#discount")
   const priceElement = document.querySelector("#price")
 
-  console.log(typeof Number(age))
-
-  if (name != "" && lastname != "" && age != "" && kmToGo != "") {
-    nameElement.innerHTML = name
-    lastnameElement.innerHTML = lastname
-    ageElement.innerHTML = age
-    kmToGoElement.innerHTML = kmToGo + "km"
-    discountElement.innerHTML = Utils.calculatePrice(age, kmToGo).discount
-    priceElement.innerHTML = Utils.calculatePrice(age, kmToGo).price + "€"
+  if (isNaN(parseInt(age)) || isNaN(parseInt(kmToGo))) {
+    alert("inserire valori numerici alla voce età e km da percorrere")
   } else {
-    tableRow.innerHTML = `<td class="error-td"  colspan="5" >
-      <span class="error">inserisci dati validi</span>
-    </td>`
+    if (name != "" && lastname != "" && age != "" && kmToGo != "") {
+      nameElement.innerHTML = name
+      lastnameElement.innerHTML = lastname
+      ageElement.innerHTML = age
+      kmToGoElement.innerHTML = kmToGo + "km"
+      discountElement.innerHTML = Utils.calculatePrice(age, kmToGo).discount
+      priceElement.innerHTML = Utils.calculatePrice(age, kmToGo).price + "€"
+    } else {
+      tableRow.innerHTML = `<td class="error-td"  colspan="5" >
+        <span class="error">inserisci dati validi</span>
+      </td>`
 
-    setTimeout(() => {
-      window.location.reload()
-    }, 1000)
+      setTimeout(() => {
+        window.location.reload()
+      }, 1000)
+    }
   }
 })
 
